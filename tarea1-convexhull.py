@@ -102,6 +102,8 @@ arr = [Point(-1,0.5),Point(2,0.5),Point(-1.5,0.5),Point(2.5,0.5)]
 for i in range(len(x_rand)):
 	arr.append(Point(x_rand[i], y_rand[i]))
 	
+print(quick)#retorna los puntos que forman el convexhull	
+'''
 if __name__=='__main__':
 	from timeit import Timer
  
@@ -109,5 +111,5 @@ if __name__=='__main__':
 	t = Timer("qhull(arr)", "from __main__ import qhull, arr")
 	took = t.timeit(samples)/samples 
 	print( "qhull for {} integers took {} secs".format(len(arr), took))
-
+'''
 
