@@ -1,5 +1,4 @@
 import numpy as np
-#import matplotlib.pyplot as plt
 import random
 import sys
 
@@ -19,7 +18,7 @@ def Distancia(a, b, c):
 	return abs(num)
 
 def location(a, b, p):
-	loc = (b.x - a.x) * (p.y - a.y) - (b.y - a.y) * (p.x - a.x)
+	loc = (b.x - a.x) * (p.y - a.y) - (b.y - a.y) * (p.x - a.x)#producto cruz
 	if loc > 0:
 		return 1
 	else:
@@ -46,9 +45,7 @@ def qhull(point):
 			Izquierda.append(p)
 		else:
 			Derecha.append(p)
-	if Izquierda==[] or Derecha ==[]:
-		print("peor caso, probar otro arreglo")
-		return
+			
 	hullset(A, B, Derecha, arr_sol)
 	hullset(B, A, Izquierda, arr_sol)
 
@@ -63,7 +60,7 @@ def hullset(A, B, part, covex):
 	if len(part) == 1:
 		p = part[0]
 		part.remove(p)
-		covex.insert(pos, p)
+		covex.insert(pos, p)#se agrega un punto a la solucion final
 		return
 
 	dist = 0
@@ -95,11 +92,8 @@ def hullset(A, B, part, covex):
 	hullset(A, P, leftAP, covex)
 	hullset(P, B, leftPB, covex)
 
-
-
-
-
-points_rand = np.random.rand(500000,2)
+n=int(input("Ingrese la cantida de elementos"))
+points_rand = np.random.rand(n,2)
 x_rand = points_rand[:, 0]
 y_rand = points_rand[:, 1]
 
@@ -108,30 +102,12 @@ arr = [Point(-1,0.5),Point(2,0.5),Point(-1.5,0.5),Point(2.5,0.5)]
 for i in range(len(x_rand)):
 	arr.append(Point(x_rand[i], y_rand[i]))
 	
-'''
-for i in range (10000+2): #n×2 es la cantidad de enteros en el arreglo, si esq el rango es desde negativos a positivos
-		arr.append(Point(random.randint(0,9000000),random.randint(0,9000000)))
-'''
-#print(arr)
-#a0=Point(1,1)
-#a1=Point(2,2)
-#a2=Point(4,1)
-#a3=Point(4,3)
-#a4=Point(1,3)
-#a5=Point(3,4)
-#arr=[a0,a1,a2,a3,a4,a5]
-#quick = qhull(arr)
-#print("Done")
-
 if __name__=='__main__':
 	from timeit import Timer
  
 	samples = 1
 	t = Timer("qhull(arr)", "from __main__ import qhull, arr")
-	took = t.timeit(samples)/samples # average of 10 executions
+	took = t.timeit(samples)/samples 
 	print( "qhull for {} integers took {} secs".format(len(arr), took))
 
-#print(quick)
-#plt.plot(x_rand, y_rand, 'o')
-#plt.show()
 
